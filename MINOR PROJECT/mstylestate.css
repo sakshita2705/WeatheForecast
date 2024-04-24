@@ -1,0 +1,20 @@
+#calendar {
+    border-collapse: collapse;
+    margin:0;
+    background-image: linear-gradient(45deg,#FA8072,#F89880,#FBD5AB,#FED8B1,#FFE4C4, #FFF0DB,#FFE4C4,#FED8B1,#FBD5AB,#F89880,#FA8072);
+}
+
+#calendar th,
+#calendar td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#calendar th {
+    font-size:20px;
+}
+
+.weatherInfo {
+    font-size: 15px;
+    margin-top: 5px;
+}

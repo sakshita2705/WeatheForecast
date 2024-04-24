@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>   
+    
+    <link rel="stylesheet" href="dstylestate.css">
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <!-- Button to fetch weather data -->
+    <button id="fetchWeatherBtnKerala">Fetch Daily Weather for Kerala</button>
+
+    <!-- Container to display weather information -->
+    <div id="weatherInfo"></div>
+    <button id="fetchWeatherBtnKeralag">Fetch Weekly Weather for Kerala</button>
+
+    <!-- Container to display weather chart -->
+    <div id="weather-chart"></div>
+    
+
+    <script>
+        // API endpoint URLs
+        const forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+        const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+        // API key (replace 'your_api_key_here' with your actual API key)
+        const apiKey = '090cfacd7a19d163b47fe612aa4f4dff';
+
+        // Parameters for the API requests
+        const paramsForecast = {
+            'q': 'Kerala',
+            'appid': apiKey,
+            'units': 'metric'
+        };
+
+        // Function to fetch weather data for Kerala
+        document.getElementById('fetchWeatherBtnKeralag').addEventListener('click', () => {
+            fetchWeatherForecast(forecastApiUrl, paramsForecast);
+        });
+
+        // Function to fetch weather data for Kerala
+        document.getElementById('fetchWeatherBtnKerala').addEventListener('click', () => {
+            fetchWeather('Kerala');
+        });
+
+        // Function to fetch weather forecast for Kerala and create a Plotly chart
+        function fetchWeatherForecast(apiUrl, params) {
+            fetch(apiUrl + '?' + new URLSearchParams(params))
+                .then(response => response.json())
+                .then(data => {
+                    var dates = [];
+                    var temperatures = [];
+                    var humidities = [];
+                    var wind_speeds = [];
+
+                    data.list.forEach(forecast => {
+                        dates.push(forecast.dt_txt);
+                        temperatures.push(forecast.main.temp);
+                        humidities.push(forecast.main.humidity);
+                        wind_speeds.push(forecast.wind.speed);
+                    });
+
+                    var trace1 = {
+                        x: dates,
+                        y: temperatures,
+                        type: 'scatter',
+                        mode: 'lines',
+                        name: 'Temperature (°C)'
+                    };
+
+                    var trace2 = {
+                        x: dates,
+                        y: humidities,
+                        type: 'scatter',
+                        mode: 'lines',
+                        name: 'Humidity (%)'
+                    };
+
+                    var trace3 = {
+                        x: dates,
+                        y: wind_speeds,
+                        type: 'scatter',
+                        mode: 'lines',
+                        name: 'Wind Speed (m/s)'
+                    };
+
+                    var layout = {
+                        title: 'Weekly Weather Forecast for Kerala',
+                        xaxis: {
+                            title: 'Date'
+                        },
+                        yaxis: {
+                            title: 'Value'
+                        }
+                    };
+
+                    var data = [trace1, trace2, trace3];
+
+                    Plotly.newPlot('weather-chart', data, layout);
+                })
+                .catch(error => {
+                    console.error('Failed to fetch data from the API:', error);
+                });
+        }
+
+        // Function to fetch weather data for a specific city
+        async function fetchWeather(city) {
+            const response = await fetch(`${weatherApiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+            const data = await response.json();
+            displayWeather(data);
+        }
+
+        // Function to display weather information
+        function displayWeather(weatherData) {
+            const weatherInfo = document.getElementById('weatherInfo');
+            weatherInfo.innerHTML = `
+                <h4>Weather Information</h4>
+                <p><strong>Description:</strong> ${weatherData.weather[0].description}</p>
+                <p><strong>Temperature:</strong> ${weatherData.main.temp}°C</p>
+                <p><strong>Humidity:</strong> ${weatherData.main.humidity}%</p>
+                <p><strong>Wind Speed:</strong> ${weatherData.wind.speed} m/s</p>
+            `;
+        }
+    </script>
+    <div class="container">
+
+    <iframe src="kerala_m.html"></iframe>
+</div></body>
+</html>

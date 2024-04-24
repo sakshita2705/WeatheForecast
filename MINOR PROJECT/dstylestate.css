@@ -1,0 +1,29 @@
+#weatherInfo {
+    border: 1px solid black;
+    margin: 15px 10px ;
+    background-image: linear-gradient(45deg,#FA8072,#F89880,#FBD5AB,#FED8B1,#FFE4C4, #FFF0DB,#FFE4C4,#FED8B1,#FBD5AB,#F89880,#FA8072);
+    width: 300px;
+  }
+  
+  #weatherInfo h4 {
+    margin-bottom: 10px;
+  }
+  
+  #weatherInfo p {
+    margin-bottom: 0.25em;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+body{
+    background-image: linear-gradient(45deg,#151B54, #0059FF,#87CEFA, #20B2AA,#033E3E);
+    background-repeat: no-repeat;
+}
