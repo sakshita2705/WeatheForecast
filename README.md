@@ -8,8 +8,12 @@ Through this weather forecasting analysis we are able to accurately predict the 
 FEATURES:
 
 Intuitive Web Interface:- Expedites the loading period, ensuring user-friendliness and accessibility.
+
 Efficient Searching:-	Empowers users with a seamless search engine, generating the required information swiftly.
+
 Hover and search facility:- Enhances convenience with hover-and-search actions, simplifying extracting the weather of specific time, date, and location.
+
 Attracting Visualization:-	Provides users the with interactive maps, graphs and calender to view the data as and when required .
+
 Informative Forecasts:-	The website not only provides hourly and daily forecast but also showcases weekly and monthly forecasts which include temperature, wind and humidity.
 
